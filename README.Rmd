@@ -33,6 +33,15 @@ devtools::install_github('padpadpadpad/MicrobioUoE')
 
 ```
 
+### Functions
+
+- moveRmdOutput
+    - Automatically moves .Rmd Output files into a separate folder after rendering. Just need to specify the Rmarkdown folder and the Output folder
+    
+```{r, moveRmdOutput example}
+MicrobioUoE::moveRmdOutput('~/Desktop/My_experiment/Rmd_path', '~/Desktop/My_experiment/Output_path')
+```
+
 ### Suggestions for functions
 
 If you have a piece of code you use regularly or a set of functions you use all the time and would like to integrate those into this package for others to use as well, please email at the address above or comment on the [Issues tab](https://github.com/padpadpadpad/MicrobioUoE/issues).
