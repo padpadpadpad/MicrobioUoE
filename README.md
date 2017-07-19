@@ -27,6 +27,20 @@ devtools::install_github('padpadpadpad/MicrobioUoE')
 MicrobioUoE::moveRmdOutput('~/Desktop/My_experiment/Rmd_path', '~/Desktop/My_experiment/Output_path')
 ```
 
+-   package\_install\_all()
+    -   Allows the installation of packages from CRAN, GitHub and Bioconductor at the same time. This is useful when you are starting a new analysis and already have a list of packages you need to use.
+
+``` r
+cran_packages <- c('dplyr', 'ggplot2', 'tidyr')
+github_packages <- c('padpadpadpad/nlsLoop')
+bioc_packages <- c('phangorn')
+
+MicrobioUoE::package_install_all(cran_packages, github_packages, bioc_packages)
+#> Skipping install of 'nlsLoop' from a github remote, the SHA1 (9508a1fe) has not changed since last install.
+#>   Use `force = TRUE` to force installation
+#> [1] "Huzzah all the packages are installed"
+```
+
 ### Suggestions for functions
 
 If you have a piece of code you use regularly or a set of functions you use all the time and would like to integrate those into this package for others to use as well, please email at the address above or comment on the [Issues tab](https://github.com/padpadpadpad/MicrobioUoE/issues).
