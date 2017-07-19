@@ -15,10 +15,10 @@ moveRmdOutput(Rmd_path, Output_path)
 moves all of the files with the following extensions from Rmd_path to the Output_path: .html, .docx, .pdf
 }
 \description{
-move Rmarkdown output to a separate location
+Automatically moves all .html, .pdf or .docx files from one folder to another. Designed for Rmarkdown knitted documents that are regularly rendered in the same folder as the .Rmd document
 }
 \details{
-automatically moves all .html, .pdf or .docx files from one folder to another. Designed for Rmarkdown knitted documents that are regularly rendered in the same folder as the .Rmd document
+If arguments are missing, \code{Rmd_path} defaults to \code{Rmarkdown/Rmd_files} and \code{Output_path} defaults to \code{Rmarkdown/Output_files}
 }
 \examples{
 \dontrun{moveRmdOutput('Rmd_files', 'Output_files')}
