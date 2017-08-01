@@ -35,17 +35,35 @@ devtools::install_github('padpadpadpad/MicrobioUoE')
 
 ### Functions
 
+- stock_sol_vol()
+    - calculates the amount of volume needed to dilute a stock solution to a required concentration and volume
+    
+```{r stock_sol_vol}
+MicrobioUoE::stock_sol_vol(stock_sol_conc = 0.75, new_sol_conc = 0.2, new_sol_vol = 1000)
+```
+
+- calc_norm_OD()
+    - takes an csv of OD readings and writes another csv of the required volumes to normalise the concentrations across samples
+    
+```{r calc_norm_OD, eval = FALSE}
+MicrobioUoE::calc_norm_OD('first_OD_readings.csv', 
+                          'df_volumes.csv', 
+                          new_sol_conc = 0.1,
+                          new_sol_vol = 1000,
+                          control = 0.035)
+```
+
 - moveRmdOutput()
     - Automatically moves .Rmd Output files into a separate folder after rendering. Just need to specify the Rmarkdown folder and the Output folder
     
-```{r, moveRmdOutput example, eval = FALSE}
+```{r moveRmdOutput example, eval = FALSE}
 MicrobioUoE::moveRmdOutput('~/Desktop/My_experiment/Rmd_path', '~/Desktop/My_experiment/Output_path')
 ```
 
 - package_install_all()
     - Allows the installation of packages from CRAN, GitHub and Bioconductor at the same time. This is useful when you are starting a new analysis and already have a list of packages you need to use.
 
-```{r, package_install_all}
+```{r package_install_all}
 cran_packages <- c('dplyr', 'ggplot2', 'tidyr')
 github_packages <- c('padpadpadpad/nlsLoop')
 bioc_packages <- c('phangorn')
