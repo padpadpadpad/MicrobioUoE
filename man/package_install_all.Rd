@@ -21,7 +21,7 @@ if all packages are installed successfully, the function will return  \code{'Huz
 installs all necessary packages from cran, github and bioconductor
 }
 \details{
-if only CRAN packages are needed then you can only supply a list of those as desired. The function assumes \code{devtools} it is used to install packages from GitHub. In addition  \code{biocLite} is used to install packages from Bioconductor. \code{Bioconductor} will need to be downloaded before this will work \link{https://www.bioconductor.org/install/}
+if only CRAN packages are needed then you can only supply a list of those as desired. The function assumes \code{devtools} it is used to install packages from GitHub. In addition  \code{biocLite} is used to install packages from Bioconductor. \code{Bioconductor} will need to be downloaded before this will work \url{https://www.bioconductor.org/install/}
 }
 \examples{
 cran_packages = c('dplyr')
