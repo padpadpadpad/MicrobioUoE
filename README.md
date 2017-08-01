@@ -4,7 +4,7 @@ MicrobioUoE
 
 MicrobioUoE is an R package built to allow sharing of R code and functions between the lab groups of Angus Buckling and Edze Westra. As we do very similar analyses and use similar code, this should act as an easy way to share R code.
 
-For problems and suggestions please email Daniel Padfield <_d.padfield@exeter.ac.uk>\_
+For problems and suggestions please email Daniel Padfield <d.padfield@exeter.ac.uk>
 
 ### Installation
 
@@ -60,7 +60,7 @@ MicrobioUoE::package_install_all(cran_packages, github_packages, bioc_packages)
 #> Installing nlsLoop
 #> '/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file  \
 #>   --no-environ --no-save --no-restore --quiet CMD INSTALL  \
-#>   '/private/var/folders/bw/019yc5_138qdgk1xsbz3l99r0000gn/T/RtmpS6IoMv/devtools658e7249042b/padpadpadpad-nlsLoop-9508a1f'  \
+#>   '/private/var/folders/bw/019yc5_138qdgk1xsbz3l99r0000gn/T/RtmpEu8Z66/devtools65c35a834697/padpadpadpad-nlsLoop-9508a1f'  \
 #>   --library='/Library/Frameworks/R.framework/Versions/3.4/Resources/library'  \
 #>   --install-tests
 #> 
