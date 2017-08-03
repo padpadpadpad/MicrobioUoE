@@ -18,6 +18,10 @@
 #' control = 0.035)}
 #' @importFrom magrittr '%>%'
 #' @export
+
+# quiets concerns of R CMD check re: the .'s that appear in pipelines
+if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
+
 calc_norm_OD <- function(file_in, file_out, new_sol_conc, new_sol_vol, control){
 
   # set up defaults
@@ -27,8 +31,8 @@ calc_norm_OD <- function(file_in, file_out, new_sol_conc, new_sol_vol, control){
   if(missing(control)){control <- 0}
 
   # load in data ####
-  d <- utils::read.csv(file_in, stringsAsFactors = FALSE)
-  d <- dplyr::mutate_(d, 'cont' = control,
+  d <- utils::read.csv(file_in, stringsAsFactors = FALSE) %>%
+    dplyr::mutate_(., 'cont' = control,
            'OD_cor' = 'OD - cont')
 
   # calculate concentrations ####w
