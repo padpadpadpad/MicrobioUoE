@@ -35,6 +35,21 @@ devtools::install_github('padpadpadpad/MicrobioUoE')
 
 ### Functions
 
+- bind_biolog_sheet()
+    - cleans and binds biolog data on a single sheet of an excel spreadsheet. Returns a dataframe where each substrate is a column and each row is a separate plate. The values in each column are the OD readings of that plate in that substrate.
+    
+- bind_biolog_all()
+    - cleans and binds biolog data across multiple sheets of an excel spreadsheet. Returns a dataframe where each substrate is a column and each row is a separate plate. The values in each column are the OD readings of that plate in that substrate. Also includes columns for the sheet and plate of each row.
+
+```{r bind_biolog_all, eval = FALSE}
+filename <- '~/Desktop/biolog_data.xlsx'
+sheets <- paste0('S', 1:10, sep = '')
+
+
+MicrobioUoE::bind_biolog_all(filename, sheets)
+
+```
+
 - stock_sol_vol()
     - calculates the amount of volume needed to dilute a stock solution to a required concentration and volume
     
