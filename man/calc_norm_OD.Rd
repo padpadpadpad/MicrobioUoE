@@ -3,9 +3,6 @@
 \name{calc_norm_OD}
 \alias{calc_norm_OD}
 \title{calc_norm_OD}
-\usage{
-calc_norm_OD(file_in, file_out, new_sol_conc, new_sol_vol, control)
-}
 \arguments{
 \item{file_in}{the filename of the file containing the initial OD readings}
 

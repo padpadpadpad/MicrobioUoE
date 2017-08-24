@@ -17,7 +17,8 @@
 #' new_sol_vol = 1000,
 #' control = 0.035)}
 #' @importFrom magrittr '%>%'
-#' @export
+#' @name calc_norm_OD
+#' @export calc_norm_OD
 
 # quiets concerns of R CMD check re: the .'s that appear in pipelines
 if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
