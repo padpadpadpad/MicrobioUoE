@@ -42,6 +42,6 @@ calc_norm_OD <- function(file_in, file_out, new_sol_conc, new_sol_vol, control){
               'inoc_diluent' = 'new_sol_vol - inoc_samp')
 
   # write csv out
-  utils::write.csv(dplyr::select_(d, '-cont'), file_out)
+  utils::write.csv(dplyr::select_(d, '-cont'), file_out, row.names = FALSE)
 
 }
