@@ -30,7 +30,7 @@ bind_biolog_sheet <- function(x, file){
   d <- dplyr::mutate(d, id = rep(seq(1,num_plates,1), each = 8)) %>%
     tidyr::gather(., 'colnew', 'value', 1:12) %>%
     dplyr::group_by(., id) %>%
-    dplyr::mutate(., sequence = seq(1,dplyr::n(),1)) %>%
+    dplyr::mutate(., sequence = seq(1, n(),1)) %>%
     dplyr::select(., -colnew) %>%
     tidyr::spread(., sequence, value) %>%
     dplyr::mutate(., sheet = x) %>%
