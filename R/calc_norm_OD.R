@@ -21,7 +21,7 @@
 #' @export calc_norm_OD
 
 # quiets concerns of R CMD check re: the .'s that appear in pipelines
-if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
+if(getRversion() >= "2.15.1")  utils::globalVariables(c(".", 'OD', 'cont', 'OD_cor', 'inoc_samp'))
 
 calc_norm_OD <- function(file_in, file_out, new_sol_conc, new_sol_vol, control){
 
@@ -33,15 +33,15 @@ calc_norm_OD <- function(file_in, file_out, new_sol_conc, new_sol_vol, control){
 
   # load in data ####
   d <- utils::read.csv(file_in, stringsAsFactors = FALSE) %>%
-    dplyr::mutate_(., 'cont' = control,
-           'OD_cor' = 'OD - cont')
+    dplyr::mutate(., cont = (!! control),
+           OD_cor = OD - cont)
 
   # calculate concentrations ####w
-  d <- dplyr::mutate_(d, 'dil_fac' = 'OD_cor / new_sol_conc',
-              'inoc_samp' = 'round(MicrobioUoE::stock_sol_vol(OD_cor, new_sol_conc, new_sol_vol), 0)',
-              'inoc_diluent' = 'new_sol_vol - inoc_samp')
+  d <- dplyr::mutate(d, dil_fac = OD_cor / (!! new_sol_conc),
+              inoc_samp = round(MicrobioUoE::stock_sol_vol(OD_cor, (!! new_sol_conc), (!! new_sol_vol)), 0),
+              inoc_diluent = (!! new_sol_vol) - inoc_samp)
 
   # write csv out
-  utils::write.csv(dplyr::select_(d, '-cont'), file_out, row.names = FALSE)
+  utils::write.csv(dplyr::select(d, -cont), file_out, row.names = FALSE)
 
 }
