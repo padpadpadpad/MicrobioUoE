@@ -32,35 +32,41 @@ dada2_raw_read_setup <- function(packages = c('ggplot2', 'dada2', 'phyloseq', 'D
                                  rev_error = NULL,
                                  run_filter = 'Y'){
 
-  if(! packages %in% utils::installed.packages() == TRUE)
+  if(any(packages %in% utils::installed.packages()) == FALSE)
     {
-      stop("Some of the packages are currently not installed. Please install them before running this function again.",
+    pkgs_not_pres <- packages[! packages %in% utils::installed.packages()]
+    stop(paste("Some of the packages are currently not installed. Please install them before running this function again. Packages not present are:", paste(pkgs_not_pres, collapse = ' '), sep = ' '),
            call. = FALSE)
     }
 
-  # assign some things to global environment
+  # load in packages
+  lapply(packages, library, character.only = TRUE)
+
+  # assign things to global environment
   assign('raw_path', raw_path, envir = globalenv())
   assign('filt_path', filt_path, envir = globalenv())
   assign('run_filter', run_filter, envir = globalenv())
-
-  # assign extra bits and pieces
   if(!is.null(fwd_error)){assign('fwd_error', readRDS(fwd_error), envir = globalenv())}
   if(!is.null(rev_error)){assign('rev_error', readRDS(rev_error), envir = globalenv())}
   assign('output_path', output_path, envir = globalenv())
   assign('ref_fasta', ref_fasta, envir = globalenv())
   assign('ref_fasta_spp', ref_fasta_spp, envir = globalenv())
 
-  # create folders for output and progress based on the time
+  # create folders and progress file
+
+  # make time an internal object
   time <- format(Sys.time(), '%Y%m%d_%H:%M_')
+
+  # create progress file
   file.create(paste(progress_path, '/', time, 'progress.txt', sep = ''))
   assign('progress_file', paste(progress_path, '/', time, 'progress.txt', sep = ''), envir = globalenv())
   writeLines(paste('Run started at ', Sys.time()), progress_file)
 
   dir.create(file.path(plot_path, substr(time, 1, nchar(time) - 1)))
   assign('plot_path', file.path(plot_path, substr(time, 1, nchar(time) - 1)), envir = globalenv())
+  dir.create(file.path(output_path, substr(time, 1, nchar(time) - 1)))
+  assign('output_path', file.path(output_path, substr(time, 1, nchar(time) - 1)), envir = globalenv())
 
-  lapply(packages, library, character.only = TRUE)
-  if(!missing(meta_data)){
-    assign('meta', utils::read.csv(meta_data, stringsAsFactors = FALSE), envir = globalenv())
-  }
+  # load in metadata file
+  assign('meta', utils::read.csv(meta_data, stringsAsFactors = FALSE), envir = globalenv())
 }
