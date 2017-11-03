@@ -43,26 +43,22 @@ dada2_raw_read_setup <- function(packages = c('ggplot2', 'dada2', 'phyloseq', 'D
   assign('filt_path', filt_path, envir = globalenv())
   assign('run_filter', run_filter, envir = globalenv())
 
-  # create folders if they are not present
-  if(!missing(plot_path)){suppressWarnings(dir.create(plot_path))}
-  if(!missing(filt_path)){suppressWarnings(dir.create(filt_path))}
-  if(!missing(progress_path)){suppressWarnings(dir.create(progress_path))}
-
   # assign extra bits and pieces
   if(!is.null(fwd_error)){assign('fwd_error', readRDS(fwd_error), envir = globalenv())}
   if(!is.null(rev_error)){assign('rev_error', readRDS(rev_error), envir = globalenv())}
-  if(!missing(output_path)) assign('output_path', output_path, envir = globalenv())
-  if(!missing(ref_fasta)) assign('ref_fasta', ref_fasta, envir = globalenv())
-  if(!missing(ref_fasta_spp)) assign('ref_fasta_spp', ref_fasta_spp, envir = globalenv())
+  assign('output_path', output_path, envir = globalenv())
+  assign('ref_fasta', ref_fasta, envir = globalenv())
+  assign('ref_fasta_spp', ref_fasta_spp, envir = globalenv())
 
-  if(!missing(progress_path)){assign('time', format(Sys.time(), '%Y%m%d_%H:%M_'), envir = globalenv())
-    file.create(paste(progress_path, '/', time, 'progress.txt', sep = ''))
-    assign('progress_file', paste(progress_path, '/', format(Sys.time(), '%Y%m%d_%H:%M_'), 'progress.txt', sep = ''), envir = globalenv())
-    writeLines(paste('Run started at ', Sys.time()), progress_file)}
-  if(!missing(plot_path)){
-    if(!utils::file_test("-d", file.path(plot_path, substr(time, 1, nchar(time) - 1)))) dir.create(file.path(plot_path, substr(time, 1, nchar(time) - 1)))
-    assign('plot_path', file.path(plot_path, substr(time, 1, nchar(time) - 1)), envir = globalenv())
-  }
+  # create folders for output and progress based on the time
+  time <- format(Sys.time(), '%Y%m%d_%H:%M_')
+  file.create(paste(progress_path, '/', time, 'progress.txt', sep = ''))
+    assign('progress_file', paste(progress_path, '/', time, 'progress.txt', sep = ''), envir = globalenv())
+    writeLines(paste('Run started at ', Sys.time()), progress_file)
+
+  utils::file_test("-d", file.path(plot_path, substr(time, 1, nchar(time) - 1)))    dir.create(file.path(plot_path, substr(time, 1, nchar(time) - 1)))
+  assign('plot_path', file.path(plot_path, substr(time, 1, nchar(time) - 1)), envir = globalenv())
+
   lapply(packages, library, character.only = TRUE)
   if(!missing(meta_data)){
     assign('meta', utils::read.csv(meta_data, stringsAsFactors = FALSE), envir = globalenv())
