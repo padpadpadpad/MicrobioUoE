@@ -53,10 +53,10 @@ dada2_raw_read_setup <- function(packages = c('ggplot2', 'dada2', 'phyloseq', 'D
   # create folders for output and progress based on the time
   time <- format(Sys.time(), '%Y%m%d_%H:%M_')
   file.create(paste(progress_path, '/', time, 'progress.txt', sep = ''))
-    assign('progress_file', paste(progress_path, '/', time, 'progress.txt', sep = ''), envir = globalenv())
-    writeLines(paste('Run started at ', Sys.time()), progress_file)
+  assign('progress_file', paste(progress_path, '/', time, 'progress.txt', sep = ''), envir = globalenv())
+  writeLines(paste('Run started at ', Sys.time()), progress_file)
 
-  utils::file_test("-d", file.path(plot_path, substr(time, 1, nchar(time) - 1)))    dir.create(file.path(plot_path, substr(time, 1, nchar(time) - 1)))
+  dir.create(file.path(plot_path, substr(time, 1, nchar(time) - 1)))
   assign('plot_path', file.path(plot_path, substr(time, 1, nchar(time) - 1)), envir = globalenv())
 
   lapply(packages, library, character.only = TRUE)
