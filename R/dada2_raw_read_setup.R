@@ -32,7 +32,7 @@ dada2_raw_read_setup <- function(packages = c('ggplot2', 'dada2', 'phyloseq', 'D
                                  rev_error = NULL,
                                  run_filter = 'Y'){
 
-  if(! packages %in% utils::installed.packages())
+  if(! packages %in% utils::installed.packages() == TRUE)
     {
       stop("Some of the packages are currently not installed. Please install them before running this function again.",
            call. = FALSE)
