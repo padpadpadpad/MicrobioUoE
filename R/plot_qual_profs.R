@@ -19,7 +19,7 @@ plot_qual_profs <- function(filename, files_Fwd, files_Rev, subsample = NULL, ..
 
   if (!requireNamespace("dada2", quietly = TRUE)) {
     stop("Package 'dada2' needed for this function to work. Please install it
-         either manually or using the function amplicR::setup().",
+         either manually.",
          call. = FALSE)
   }
 
