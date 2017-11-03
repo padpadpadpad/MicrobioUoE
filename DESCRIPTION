@@ -15,4 +15,6 @@ Imports: devtools,
     utils,
     purrr,
     tidyr,
-    readxl
+    readxl,
+    ggplot2
+Suggests: dada2
