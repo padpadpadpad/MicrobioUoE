@@ -8,7 +8,7 @@
 
 geom_pretty_boxplot <- function(...){
   list(
-    ggplot2::geom_boxplot(outlier.shape = NA, position = ggplot2::position_dodge(width = 0.75), col = 'black', ...),
+    ggplot2::geom_boxplot(outlier.shape = NA, position = ggplot2::position_dodge(width = 0.75), ...),
     ggplot2::stat_summary(geom = 'crossbar', position = ggplot2::position_dodge(width = 0.75), fatten = 0, color = 'white', width = 0.4, fun.data = function(x){ return(c(y = stats::median(x), ymin = stats::median(x), ymax = stats::median(x)))})
   )
 }
