@@ -55,7 +55,7 @@ dada2_raw_read_setup <- function(packages = c('ggplot2', 'dada2', 'phyloseq', 'D
   # create folders and progress file
 
   # make time an internal object
-  time <- format(Sys.time(), '%Y%m%d_%H:%M_')
+  time <- format(Sys.time(), '%Y%m%d_%Hh%Mm_')
 
   # create progress file
   file.create(paste(progress_path, '/', time, 'progress.txt', sep = ''))
