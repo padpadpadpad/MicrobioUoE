@@ -16,27 +16,29 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c(".", 'sum_row', 'value',
 bind_biolog_sheet <- function(x, file){
 
   # read in file
-  dat <- readxl::read_excel(file, sheet = x, col_names = F)
+  dat <- readxl::read_excel(file, sheet = x, col_names = FALSE)
 
   # process file
-  d <- dplyr::select(dat, 2:13) %>%
+  d <- dplyr::select(dat, 1:13) %>%
     tidyr::drop_na(.) %>%
-    dplyr::mutate(., sum_row = rowSums(.)) %>%
-    dplyr::filter(., sum_row != sum(1:12)) %>%
-    dplyr::select(., -sum_row)
+    janitor::clean_names() %>%
+    tidyr::gather(., 'well', 'od', 2:13) %>%
+    dplyr::mutate(., well = readr::parse_number(well),
+                  well = paste(x_1, well, sep = '_'),
+                  file = basename(tools::file_path_sans_ext(file)),
+                  sheet = sheet)
 
   # work out how many plates per sheet
-  num_plates <- nrow(d)/8
+  num_plates <- nrow(d)/96
 
-  d <- dplyr::mutate(d, id = rep(seq(1, num_plates, 1), each = 8)) %>%
-    tidyr::gather(., 'colnew', 'value', 1:12) %>%
-    dplyr::group_by(., id) %>%
-    dplyr::mutate(., sequence = seq(1, n(),1)) %>%
-    dplyr::select(., -colnew) %>%
-    tidyr::spread(., sequence, value) %>%
-    dplyr::mutate(., sheet = x) %>%
-    dplyr::select(., sheet, id, dplyr::everything()) %>%
-    data.frame()
+  # vector of list of OD wavelengths
+  wavelengths <- dplyr::select(dat, 14) %>%
+    tidyr::drop_na(.) %>%
+    dplyr::distinct() %>%
+    dplyr::pull()
+
+  d <- dplyr::mutate(d, od_wave = rep(wavelengths, each = 96)) %>%
+    dplyr::select(file, sheet, od_wave, well, od)
   return(d)
 
   }

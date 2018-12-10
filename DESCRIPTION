@@ -8,13 +8,16 @@ Description: An R package to aid the sharing of code and methods between the lab
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
-Imports: devtools,
+RoxygenNote: 6.1.1
+Imports: 
+    devtools,
     dplyr,
     magrittr,
     utils,
     purrr,
     tidyr,
     readxl,
-    ggplot2
+    ggplot2,
+    readr,
+    janitor
 Suggests: dada2
