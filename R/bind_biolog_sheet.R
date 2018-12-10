@@ -21,7 +21,8 @@ bind_biolog_sheet <- function(x, file){
   # process file
   d <- dplyr::select(dat, 1:13) %>%
     tidyr::drop_na(.) %>%
-    janitor::clean_names() %>%
+    janitor::clean_names()
+  d <- dplyr::mutate(d, num_plate = rep(1:(nrow(d)/8), each = 8)) %>%
     tidyr::gather(., 'well', 'od', 2:13) %>%
     dplyr::mutate(., well = readr::parse_number(well)-1,
                   well = paste(x_1, well, sep = '_'),
@@ -37,7 +38,8 @@ bind_biolog_sheet <- function(x, file){
     dplyr::distinct() %>%
     dplyr::pull()
 
-  d <- dplyr::mutate(d, od_wave = rep(wavelengths, each = 96*num_plates/length(wavelengths))) %>%
+  d <- dplyr::arrange(d, num_plate) %>%
+    dplyr::mutate(., od_wave = rep(wavelengths, each = 96*num_plates/length(wavelengths))) %>%
     dplyr::select(file, sheet, od_wave, well, od)
   return(d)
 
