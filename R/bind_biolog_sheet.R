@@ -23,7 +23,7 @@ bind_biolog_sheet <- function(x, file){
     tidyr::drop_na(.) %>%
     janitor::clean_names() %>%
     tidyr::gather(., 'well', 'od', 2:13) %>%
-    dplyr::mutate(., well = readr::parse_number(well),
+    dplyr::mutate(., well = readr::parse_number(well)-1,
                   well = paste(x_1, well, sep = '_'),
                   file = basename(tools::file_path_sans_ext(file)),
                   sheet = x)
