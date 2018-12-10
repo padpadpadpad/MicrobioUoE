@@ -26,7 +26,7 @@ bind_biolog_sheet <- function(x, file){
     dplyr::mutate(., well = readr::parse_number(well),
                   well = paste(x_1, well, sep = '_'),
                   file = basename(tools::file_path_sans_ext(file)),
-                  sheet = sheet)
+                  sheet = x)
 
   # work out how many plates per sheet
   num_plates <- nrow(d)/96
