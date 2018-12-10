@@ -37,7 +37,7 @@ bind_biolog_sheet <- function(x, file){
     dplyr::distinct() %>%
     dplyr::pull()
 
-  d <- dplyr::mutate(d, od_wave = rep(wavelengths, each = 96)) %>%
+  d <- dplyr::mutate(d, od_wave = rep(wavelengths, each = 96*num_plates/length(wavelengths))) %>%
     dplyr::select(file, sheet, od_wave, well, od)
   return(d)
 
