@@ -4,15 +4,21 @@
 \alias{dada2_raw_read_setup}
 \title{dada2_raw_read_setup}
 \usage{
-dada2_raw_read_setup(packages = c("ggplot2", "dada2", "phyloseq",
-  "DECIPHER", "tidyr", "dplyr", "MicrobioUoE"),
-  raw_path = "data/raw_fastq", filt_path = "data/filtered_fastq",
-  plot_path = "plots", output_path = "data/output",
+dada2_raw_read_setup(
+  packages = c("ggplot2", "dada2", "phyloseq", "DECIPHER", "tidyr", "dplyr",
+    "MicrobioUoE"),
+  raw_path = "data/raw_fastq",
+  filt_path = "data/filtered_fastq",
+  plot_path = "plots",
+  output_path = "data/output",
   progress_path = "data/progress",
   ref_fasta = "data/ref_trainsets/rdp_train_set_16.fa",
   ref_fasta_spp = "data/ref_trainsets/rdp_species_assignment_16.fa",
-  meta_data = "data/metadata.csv", fwd_error = NULL,
-  rev_error = NULL, run_filter = "Y")
+  meta_data = "data/metadata.csv",
+  fwd_error = NULL,
+  rev_error = NULL,
+  run_filter = "Y"
+)
 }
 \arguments{
 \item{packages}{list of packages to load in. Defaults to \code{dada2}, \code{MicrobioUoE}, \code{ggplot2}, \code{tidyr}, \code{dplyr}, \code{phyloseq}, \code{DECIPHER}}

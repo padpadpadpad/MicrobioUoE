@@ -4,8 +4,11 @@
 \alias{package_install_all}
 \title{package_install_all}
 \usage{
-package_install_all(cran_packages = NULL, github_packages = NULL,
-  bioc_packages = NULL)
+package_install_all(
+  cran_packages = NULL,
+  github_packages = NULL,
+  bioc_packages = NULL
+)
 }
 \arguments{
 \item{cran_packages}{a list of packages to install from CRAN}
@@ -21,7 +24,7 @@ if all packages are installed successfully, the function will return  \code{'Huz
 installs all necessary packages from cran, github and bioconductor
 }
 \details{
-if only CRAN packages are needed then you can only supply a list of those as desired. The function assumes \code{devtools} it is used to install packages from GitHub. In addition  \code{biocLite} is used to install packages from Bioconductor. \code{Bioconductor} will need to be downloaded before this will work \url{https://www.bioconductor.org/install/}
+if only CRAN packages are needed then you can only supply a list of those as desired. The function assumes \code{remotes} it is used to install packages from GitHub. In addition  \code{BiocManager} is used to install packages from Bioconductor. \code{Bioconductor} will need to be downloaded before this will work \url{https://www.bioconductor.org/install/}
 }
 \examples{
 cran_packages = c('dplyr')

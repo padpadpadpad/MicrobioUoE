@@ -4,7 +4,7 @@
 #' @param cran_packages a list of packages to install from CRAN
 #' @param github_packages a list of packages to install from GitHub
 #' @param bioc_packages a list of packages to install from Bioconductor
-#' @details if only CRAN packages are needed then you can only supply a list of those as desired. The function assumes \code{devtools} it is used to install packages from GitHub. In addition  \code{biocLite} is used to install packages from Bioconductor. \code{Bioconductor} will need to be downloaded before this will work \url{https://www.bioconductor.org/install/}
+#' @details if only CRAN packages are needed then you can only supply a list of those as desired. The function assumes \code{remotes} it is used to install packages from GitHub. In addition  \code{BiocManager} is used to install packages from Bioconductor. \code{Bioconductor} will need to be downloaded before this will work \url{https://www.bioconductor.org/install/}
 #' @return if all packages are installed successfully, the function will return  \code{'Huzzah all the packages are installed'}. If not it will return the list of packages that have not been installed
 #' @examples
 #' cran_packages = c('dplyr')
@@ -25,13 +25,12 @@ package_install_all <- function(cran_packages = NULL, github_packages = NULL, bi
 
   inst <- github_packages %in% utils::installed.packages()
   if (any(!inst)) {
-    devtools::install_github(github_packages[!inst])
+    remotes::install_github(github_packages[!inst])
   }
 
   inst <- bioc_packages %in% utils::installed.packages()
   if (any(!inst)) {
-    source("https://bioconductor.org/biocLite.R")
-    biocLite(bioc_packages[!inst])
+    BiocManager::install(bioc_packages[!inst])
   }
 
   if(length(c(basename(github_packages), cran_packages, bioc_packages)[! c(basename(github_packages), cran_packages, bioc_packages) %in% utils::installed.packages()]) == 0){
